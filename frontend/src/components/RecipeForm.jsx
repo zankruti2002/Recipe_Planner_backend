@@ -36,10 +36,11 @@ const RecipeForm = () => {
         setRecipe(prev => ({ ...prev, videoURL: url }));
         
         // Extract video ID from various YouTube URL formats
-        const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+        const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/;
         const match = url.match(youtubeRegex);
+
         
-        if (match) {
+        if (match && match[1]) {
             const videoId = match[1];
             setPreviewVideo(`https://www.youtube.com/embed/${videoId}`);
         } else {
@@ -98,7 +99,7 @@ const RecipeForm = () => {
                 return;
             }
 
-            const response = await axios.post('http://localhost:8000/recipes', recipe, {
+            const response = await axios.post('https://recipe-planner-ftl0.onrender.com/recipes', recipe, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ function Home() {
     
     const fetchAllRecipes=async()=>{
         // 1.Make Request to DB
-        const response = await axios.get("http://localhost:8000/recipes/");
+        const response = await axios.get(`https://recipe-planner-ftl0.onrender.com/recipes/`);
         const data = await response.data;
         
         await setAllRecipes(data.recipes);
@@ -39,7 +39,7 @@ function Home() {
         const token = localStorage.getItem("token");
         
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const response = await axios.post("http://localhost:8000/savedRecipe/",savedData);
+        const response = await axios.post("https://recipe-planner-ftl0.onrender.com/savedRecipe/",savedData);
         
         console.log(response);
     }

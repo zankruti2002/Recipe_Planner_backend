@@ -23,7 +23,7 @@ function Register() {
     
       const onSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post('http://localhost:8000/users/register', regFormData)
+        const response = await axios.post('https://recipe-planner-ftl0.onrender.com/users/register', regFormData)
         const data = await response.data;
         const token = await data.token;
         console.log(data);

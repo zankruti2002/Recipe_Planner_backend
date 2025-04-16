@@ -3,46 +3,51 @@ import { Link, useNavigate } from 'react-router-dom';
 import  {AuthContext}  from '../auth/authSlice'
 import axios from 'axios';
 import Aside from './Aside';
-function Login() {
 
+function Login() {
     const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-      });
-      const navigate = useNavigate();
-    
-      const onChange = (e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }));
-        console.log(formData);
-      };
-    
-      const onSubmit = async (e) => {
-        e.preventDefault();
-        // console.log(formData.email+"Hello");
-        // console.log("Welcome");
-        const response = await axios.post('http://localhost:8000/users/login', formData)
+    });
+    const navigate = useNavigate();
 
-
-        const data = await response.data;
-        const token = await data.token;
-        console.log(data);
-
-
-        if (data) {
-            
-            login(data);
+    // Check if the user is already logged in on component mount
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
             navigate('/Dashboard');
         }
-        else{
-            alert("This User doesn't exit")
+    }, [navigate]); // Dependency on navigate
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            
+            const response = await axios.post('https://recipe-planner-ftl0.onrender.com/users/login', formData);
+            const data = response.data;
+
+            if (data && data.token) {
+                // Store the token in localStorage
+                localStorage.setItem('token', data.token);
+                login(data); // Assuming your login context will set the user data
+                navigate('/Dashboard');
+            } else {
+                alert("This User doesn't exist");
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+            alert('Login failed. Please try again.');
         }
-      };
-    
-     
+    };  
+
     return (
     <>
         <Aside />

@@ -26,7 +26,7 @@ function Profile() {
         if (isConfirmed) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             console.log(user._id);
-            const response = await axios.delete(`http://localhost:8000/users/delete/${user._id}`);
+            const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/users/delete/${user._id}`);
             console.log(response);
             logout()
             navigate('/');
@@ -43,7 +43,7 @@ function Profile() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         try {
-            const response = await axios.put(`http://localhost:8000/users/update/${user._id}`, formData);
+            const response = await axios.put(`https://recipe-planner-ftl0.onrender.com/users/update/${user._id}`, formData);
             console.log(response);
             if(response.statusText === "OK"){
                 setIsUserUpdated(true)
@@ -56,7 +56,6 @@ function Profile() {
 
             console.error(error);
         }
-
       };
     return (
 

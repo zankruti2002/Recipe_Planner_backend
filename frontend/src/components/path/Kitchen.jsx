@@ -15,7 +15,7 @@ function Kitchen() {
         
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        const response = await axios.get("http://localhost:8000/myKitchen/");
+        const response = await axios.get("https://recipe-planner-ftl0.onrender.com/myKitchen/");
         const data = await response.data;
         console.log(data.allItems);
 
@@ -27,7 +27,7 @@ function Kitchen() {
         
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const response = await axios.delete(`http://localhost:8000/myKitchen/${id}`);
+      const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/myKitchen/${id}`);
       console.log(response);
       setKitchenItems(kitchenItems.filter(kitchenItems => kitchenItems._id !== id));
   
@@ -38,7 +38,8 @@ function Kitchen() {
       if (isConfirmed) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const response = await axios.delete(`http://localhost:8000/myKitchen/`);
+      const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/myKitchen/`);
+      console.log(response.data);
       setKitchenItems([])
       }else{
           console.log("List not deleted.");

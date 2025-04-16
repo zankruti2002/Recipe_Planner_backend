@@ -16,7 +16,7 @@ function Savedrecipes() {
         
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        const response = await axios.get("http://localhost:8000/savedRecipe/");
+        const response = await axios.get("https://recipe-planner-ftl0.onrender.com/savedRecipe/");
         const data = await response.data;
         console.log(data.allRecipes);
         await setSavedRecipes(data.allRecipes);
@@ -27,7 +27,8 @@ function Savedrecipes() {
         
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const response = await axios.delete(`http://localhost:8000/savedRecipe/${id}`);
+      const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/savedRecipe/${id}`);
+      console.log(response.data);
       setSavedRecipes(savedRecipes.filter(savedRecipes => savedRecipes._id !== id));
   
       

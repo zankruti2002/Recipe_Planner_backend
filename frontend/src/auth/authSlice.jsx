@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
-
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {

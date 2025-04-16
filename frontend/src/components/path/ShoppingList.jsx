@@ -15,7 +15,7 @@ function ShoppingList() {
         
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        const response = await axios.get("http://localhost:8000/shoppingList/");
+        const response = await axios.get("https://recipe-planner-ftl0.onrender.com/shoppingList/");
         const data = await response.data;
         console.log(data.allItems);
 
@@ -27,7 +27,7 @@ function ShoppingList() {
         
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const response = await axios.delete(`http://localhost:8000/shoppingList/${id}`);
+      const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/shoppingList/${id}`);
       console.log(response);
       setShopList(shopList.filter(shopList => shopList._id !== id));
   
@@ -36,7 +36,7 @@ function ShoppingList() {
     const purshased =async(item)=>{
           
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const response = await axios.post(`http://localhost:8000/myKitchen/`,item);
+      const response = await axios.post(`https://recipe-planner-ftl0.onrender.com/myKitchen/`,item);
       console.log(response.data);
       deleteItem(item._id)
     }
@@ -46,7 +46,8 @@ function ShoppingList() {
         if (isConfirmed) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        const response = await axios.delete(`http://localhost:8000/shoppingList/`);
+        const response = await axios.delete(`https://recipe-planner-ftl0.onrender.com/shoppingList/`);
+        console.log(response.data);
         setShopList([])
         }else{
             console.log("List not deleted.");
